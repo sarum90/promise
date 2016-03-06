@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+set -u
+
 CXX=${CXX:-clang++-3.7}
 OUT=build
 INCLUDES="-Iinclude/"
@@ -11,7 +14,6 @@ mkdir -p ${OUT}
 
 CMD="$CXX test/main.cpp -o ${OUT}/test ${INCLUDES} ${OPTS}"
 echo $CMD
-if $CMD
-then
- ${OUT}/test
-fi
+$CMD
+
+${OUT}/test
