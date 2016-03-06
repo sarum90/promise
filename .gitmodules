@@ -1,3 +1,6 @@
 [submodule "deps/github.com/Naios/function2"]
 	path = deps/github.com/Naios/function2
 	url = https://github.com/Naios/function2.git
+[submodule "deps/github.com/jimporter/mettle"]
+	path = deps/github.com/jimporter/mettle
+	url = https://github.com/jimporter/mettle.git
