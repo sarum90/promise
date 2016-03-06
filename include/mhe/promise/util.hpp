@@ -1,6 +1,6 @@
 #pragma once
 
-#include "function.hpp"
+#include "function2/function2.hpp"
 
 #ifndef MHE_PROMISE_START_NAMESPACE
 #define MHE_PROMISE_START_NAMESPACE namespace mhe { namespace promise {

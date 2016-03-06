@@ -6,8 +6,8 @@ set -u
 CXX=${CXX:-clang++-3.7}
 OUT=build
 INCLUDES="-Iinclude/"
-INCLUDES+=" -I${HOME}/cxxlibs/hana/include/"
-INCLUDES+=" -I${HOME}/cxxlibs/function2/"
+#INCLUDES+=" -I${HOME}/cxxlibs/hana/include/"
+INCLUDES+=" -Ideps/github.com/Naios/function2/include/"
 OPTS="-std=c++1y -Wall -Werror"
 
 mkdir -p ${OUT}
