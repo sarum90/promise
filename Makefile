@@ -2,7 +2,7 @@
 default: test
 
 test:
-	./test.sh
+	$(RUNNER) ./test.sh
 
 install_deps:
 	echo "Installing Dependencies"
