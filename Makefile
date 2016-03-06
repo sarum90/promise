@@ -1,4 +1,6 @@
 
+-include local.mak
+
 default: test
 
 test:
