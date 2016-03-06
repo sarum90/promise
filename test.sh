@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CC=clang++-3.7
+CXX=${CXX:-clang++-3.7}
 OUT=build
 INCLUDES="-Iinclude/"
 INCLUDES+=" -I${HOME}/cxxlibs/hana/include/"
@@ -9,7 +9,7 @@ OPTS="-std=c++1y -Wall -Werror"
 
 mkdir -p ${OUT}
 
-CMD="$CC test/main.cpp -o ${OUT}/test ${INCLUDES} ${OPTS}"
+CMD="$CXX test/main.cpp -o ${OUT}/test ${INCLUDES} ${OPTS}"
 echo $CMD
 if $CMD
 then
