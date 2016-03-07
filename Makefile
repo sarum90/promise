@@ -3,8 +3,13 @@
 
 default: test
 
-test:
-	$(RUNNER) ./test.sh
+test: test_main test_unique_promise
+
+test_main:
+	$(RUNNER) ./test.sh main
+
+test_unique_promise:
+	$(RUNNER) ./test.sh unique_promise
 
 install_deps:
 	echo "Installing Dependencies"
@@ -14,4 +19,4 @@ install_deps:
 clean:
 	rm -rf build
 
-.PHONY: test
+.PHONY: default test test_main test_unique_promise

@@ -7,7 +7,8 @@ Promises/Deferred/Futures for C++
 ## Natively on your computer
 
 1. Install clang++-3.7 (Ensure it can be run as `clang++-3.7`)
-2. run `make test`
+2. run `make install_deps`
+3. run `make test`
 
 Installing clang++-3.7 is a bit non-trivial. On an Ubuntu machine, if you are
 lucky, you might be able to just run `image/load.sh`. This is provided without
@@ -20,7 +21,8 @@ See `image/Dockerfile` for another way to set up the environment on Ubuntu
 ## Using docker
 
 1. run `cp local.mak.docker local.mak`
-2. run `make test`
+2. run `make install_deps`
+3. run `make test`
 
 This sets an environment variable in the Makefile that will use `./run.sh` to
 run all actual build commands. `./run.sh` is a small bash script that runs build

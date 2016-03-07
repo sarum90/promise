@@ -4,3 +4,6 @@
 [submodule "deps/github.com/jimporter/mettle"]
 	path = deps/github.com/jimporter/mettle
 	url = https://github.com/jimporter/mettle.git
+[submodule "deps/github.com/mapbox/variant"]
+	path = deps/github.com/mapbox/variant
+	url = https://github.com/mapbox/variant

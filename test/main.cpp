@@ -3,7 +3,11 @@
 #include "mhe/promise/util.hpp"
 #include "mhe/promise/promise.hpp"
 #include "mhe/promise/internal/callback_group.hpp"
+#include "mhe/promise/blocking_context_exit_executor.hpp"
+
 #include "mettle/header_only.hpp"
+
+#include "will_be_called.hpp"
 
 using MHE_PROMISE_SCOPE::Promise;
 using MHE_PROMISE_SCOPE::BlockingContextExitExecutor;
@@ -15,51 +19,7 @@ using MHE_PROMISE_SCOPE::internal::CallbackGroup;
 using mettle::suite;
 using mettle::expect;
 using mettle::equal_to;
-using mettle::filter;
 using mettle::skip;
-
-
-// =============================
-// 
-// Tiny utility object and matcher for verifying that some code was executed as
-// part of the test.
-//
-class WillBeCalled {
-  public:
-    WillBeCalled(){}
-
-    ~WillBeCalled(){
-    }
-
-    void Call() {
-      _called = true;
-    }
-
-    bool WasCalled() const {
-      return _called;
-    }
-
-  private:
-    bool _called = false;
-};
-
-auto was_called = []() {
-  return filter(
-      [](auto && x) {return x.WasCalled();},
-      equal_to(true),
-      "Callback was called: "
-  );
-};
-
-auto was_not_called = []() {
-  return filter(
-      [](auto && x) {return x.WasCalled();},
-      equal_to(false),
-      "Callback was called: "
-  );
-};
-
-// =============================
 
 
 suite<> basic("Basic tests for Promises", [](auto &_) {
