@@ -15,6 +15,7 @@ INCLUDES="-Iinclude/"
 INCLUDES+=" -Ideps/github.com/jimporter/mettle/include/"
 INCLUDES+=" -Ideps/github.com/Naios/function2/include/"
 INCLUDES+=" -Ideps/github.com/mapbox/variant/"
+INCLUDES+=" -Ideps/github.com/potswa/cxx_function/"
 OPTS="-std=c++1y -Wall -Werror"
 
 mkdir -p ${OUT}

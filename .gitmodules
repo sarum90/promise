@@ -7,3 +7,6 @@
 [submodule "deps/github.com/mapbox/variant"]
 	path = deps/github.com/mapbox/variant
 	url = https://github.com/mapbox/variant
+[submodule "deps/github.com/potswa/cxx_function"]
+	path = deps/github.com/potswa/cxx_function
+	url = https://github.com/potswa/cxx_function.git

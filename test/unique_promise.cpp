@@ -3,7 +3,14 @@
 #include "mettle/header_only.hpp"
 #include "mhe/promise/blocking_context_exit_executor.hpp"
 
+#include "cxx_function.hpp"
+
 #include "will_be_called.hpp"
+
+#include <iostream>
+
+using std::endl;
+using std::cout;
 
 using MHE_PROMISE_SCOPE::BlockingContextExitExecutor;
 using MHE_PROMISE_SCOPE::CreateUniquePromise;
@@ -93,17 +100,53 @@ suite<> unique_promise("Tests for UniquePromise", [](auto &_){
         BlockingContextExitExecutor b;
         auto unique_promise_to_test =
             CreateUniquePromise<Token<1>, Token<2>>(&b);
-        unique_promise_to_test.thenable.then([&c](Token<1>&& x) {
+        unique_promise_to_test.thenable.then([&c](auto&& x) {
             c.Call();
             expect(x, has_value(12));
             expect(x.has_token, equal_to(true));
           });
-        Token<1> result(&tw, 12);
+        Token<2> result(&tw, 12);
         result.has_token = true;
         unique_promise_to_test.Resolve(std::move(result));
+        expect(c, was_not_called());
       }
       expect(tw.copy_constructed, equal_to(0));
       expect(c, was_called());
+    });
+
+    _.test("Mapped Case.", []() {
+      WillBeCalled c;
+      WillBeCalled c2;
+      TokenWatcher tw;
+      TokenWatcher tw2;
+
+      {
+        BlockingContextExitExecutor b;
+        auto unique_promise_to_test =
+            CreateUniquePromise<Token<1>, Token<2>>(&b);
+        auto y = unique_promise_to_test.thenable.then([&c, &tw2](auto&& x) {
+            c.Call();
+            expect(x, has_value(12));
+            expect(x.has_token, equal_to(true));
+            auto retval = Token<5>(&tw2, 55);
+            retval.has_token = true;
+            return std::move(retval);
+          });
+        // BREAK
+        y.then([&c2](auto&& x) -> void {
+            c2.Call();
+            expect(x.has_token, equal_to(true));
+            expect(x, has_value(55));
+          });
+        Token<2> result(&tw, 12);
+        result.has_token = true;
+        unique_promise_to_test.Resolve(std::move(result));
+        expect(c, was_not_called());
+        expect(c2, was_not_called());
+      }
+      expect(tw.copy_constructed, equal_to(0));
+      expect(c, was_called());
+      expect(c2, was_called());
     });
 
 });
