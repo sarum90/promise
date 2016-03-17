@@ -21,7 +21,7 @@ OPTS="-std=c++1y -Wall -Werror"
 mkdir -p ${OUT}
 
 
-CMD="$CXX test/${TEST}.cpp -o ${OUT}/${TEST} ${INCLUDES} ${OPTS}"
+CMD="$CXX test/${TEST}.cpp  -o ${OUT}/${TEST} ${INCLUDES} ${OPTS}"
 echo $CMD
 $CMD
 ${OUT}/${TEST}
