@@ -3,7 +3,7 @@
 
 default: test
 
-test: test_main test_unique_promise
+test: test_main test_unique_promise test_callback test_unique_thenable
 
 test_main:
 	$(RUNNER) ./test.sh main
@@ -13,6 +13,9 @@ test_unique_promise:
 
 test_callback:
 	$(RUNNER) ./test.sh callback
+
+test_unique_thenable:
+	$(RUNNER) ./test.sh unique_thenable
 
 install_deps:
 	echo "Installing Dependencies"
